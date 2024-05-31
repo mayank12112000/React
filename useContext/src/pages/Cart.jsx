@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useState,useId } from 'react'
+import React, { useContext} from 'react'
+import {v4 as uuid} from "uuid"
 import { CartContext } from '../context/CartContext'
 export default function Cart() {
     const { cart } = useContext(CartContext)  
@@ -11,7 +12,7 @@ export default function Cart() {
             </h4>
             {cart && cart.map((product) => {
                 return (
-                    <div  style={{ border: "1px solid black", width: "80wh", height: "3rem", margin: "2px" }}>
+                    <div key={uuid()} style={{ border: "1px solid black", width: "80wh", height: "3rem", margin: "2px" }}>
                         {product.name}
                     </div>
                 )
