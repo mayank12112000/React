@@ -1,12 +1,17 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {data} from "../productData/productsData"
-import { CartContext } from '../context/CartContext';
+import { CartContext } from '../context/CartProvider'
 
 export default function ProductDetails() {
-    const products = data;
-    const {addToCart }= useContext(CartContext)
+    const [products,setProducts] = useState([])
+    const {cart} = useContext(CartContext)
+    const {addToCart} = useContext(CartContext)
+    useEffect(()=>{
+      setProducts(data)
+    },[])
   return (
     <div>
+      <h1>Items in Cart: {cart.length}</h1>
       {products.map((product)=>{
         return(
             <div key={product.id} style={{width:"15rem",height:"8rem",border:"2px solid black",margin:"5px"}}>

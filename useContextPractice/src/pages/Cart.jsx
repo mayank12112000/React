@@ -1,22 +1,21 @@
 import React, { useContext } from 'react'
-import { CartContext } from '../context/CartContext'
 import {v4 as uuid} from "uuid"
+import { CartContext } from '../context/CartProvider'
 export default function Cart() {
-  const {product} = useContext(CartContext)
-  console.log(product)
+  const {cart} = useContext(CartContext)
   return (
     <>
     <h3>
-      {`${product.length} in your cart`}
+      {`${cart.length} in your cart`}
     </h3>
-    {product.map((product)=>{
+    {cart.map((cart)=>{
       return(
         <div key={uuid()} style={{border:"1px solid black",width:"10rem",height:"5rem"}}>
-          {product.name}
+          {cart.name}
         </div>
       )
     })}
-    <h3>{product.reduce((totalPrice,item)=>totalPrice+=item.price,0)}</h3>
+    <h3>{cart.reduce((totalPrice,item)=>totalPrice+=item.price,0)}</h3>
     </>
   )
 }

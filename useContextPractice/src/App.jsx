@@ -1,21 +1,18 @@
-import './App.css'
-import Header from "./components/Header"
-import {Routes,Route, NavLink} from "react-router-dom"
-import ProductDetails from './pages/ProductDetails'
-import Cart from "./pages/Cart"
-function App() {
+import React from 'react'
+import { NavLink, Route, Routes } from 'react-router-dom';
+import Cart from './pages/Cart';
+import ProductDetails from './pages/ProductDetails';
 
+export default function App() {
   return (
-    <>
-      <Header/>
-      <NavLink to={"/"}>Home || </NavLink>
-      <NavLink to={"/cart"}>Cart</NavLink>
+    <div>
+      <h1>EKart</h1>
+        <NavLink to="/cart">Cart || </NavLink>
+        <NavLink to="/">Home</NavLink>
       <Routes>
-        <Route path='/' element={<ProductDetails/>}/>
         <Route path='/cart' element={<Cart/>}/>
+        <Route path='/' element={<ProductDetails/>}/>
       </Routes>
-    </>
+    </div>
   )
 }
-
-export default App
