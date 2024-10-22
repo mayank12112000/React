@@ -1,27 +1,31 @@
-import { useMemo, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useMemo, useState } from 'react'
 
-function App() {
-  const [counter1,setCounter1 ] = useState(0)
-  const [counter2,setCounter2 ] = useState(0)
-  const incrementOne=()=>{
-    setCounter1(counter1+1)
-  }
-  const incrementTwo=()=>{
-    setCounter2(counter2+1)
-  }
-  const isEven=useMemo(()=>{
-    return counter1%2===0
-  },[counter1])
+export default function App() {
+    const [counter1,setCounter1] = useState(0)
+    const [counter2,setCounter2] = useState(0)
+    const isEven = useMemo(()=>{
+        console.log("is even called")
+        for(let i = 0;i<2000000;i++){
+
+        }
+        return counter1 % 2 === 0
+    },[counter1])
+    const coutner1button = ()=>{
+        console.log("counter 1 button pressed")
+        setCounter1(preValue => preValue + 1)
+    }
+    const coutner2button = ()=>{
+        console.log("counter 2 button pressed")
+        setCounter2(preValue => preValue + 1)
+    }
+
   return (
-    <>
-      <button onClick={incrementOne}>counter1 {counter1}</button>
-      <span>{isEven?"even":"odd"}</span>
-      <button onClick={incrementTwo}>counter2 {counter2}</button>
-    </>
+    <div>
+      <span>{counter1} {isEven?"even":"odd"}</span>
+      
+      <button onClick={coutner1button}>counter 1</button> <br />
+      <span>{counter2}</span>
+      <button onClick={coutner2button}>counter 2</button>
+    </div>
   )
 }
-
-export default App
