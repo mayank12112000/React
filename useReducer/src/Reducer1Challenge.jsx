@@ -1,28 +1,30 @@
 import React from 'react'
+import { useReducer } from 'react'
 import { useState } from 'react'
 
 export default function Reducer1Challenge() {
-    const [formData,setFormData] = useState({
-        name:"",password:"",email:""
-    })
-    const handleSubmit=(e)=>{
-        e.preventDefault()
-        console.log(formData)
+  const initialValue = {
+    count:0,
+    counter:2
+  }
+    const reducer = (state,action)=>{
+      switch (action.type){
+        case 'increment':
+          return state + initialValue.counter
+        case "decrement":
+          return state - initialValue.counter
+        case "reset":
+          return initialValue.count
+      }
     }
-    const handleFormChange= (e)=>{
-        const {name,value} = e.target
-        setFormData((preData)=>{
-            return {...preData,[name]:value}
-        })
-        
-    }
-    // usereducer to be done
+    const [count,dispatch]  = useReducer(reducer,initialValue.count)  
+    
   return (
-    <form onSubmit={handleSubmit}>
-        <input name='name' onChange={handleFormChange} type="text" placeholder='name' value={formData.name} /> <br />
-        <input name='email' onChange={handleFormChange} type="email" placeholder='email' value={formData.email} /> <br />
-        <input name='password' onChange={handleFormChange} type="password" placeholder='password' value={formData.password} /> <br />
-      <button >submit</button>
-    </form>
+    <>
+    <h1>{count}</h1>
+    <button onClick={()=>dispatch({type:"increment"})}>increment</button>
+    <button onClick={()=>dispatch({type:"decrement"})}>decrement</button>
+    <button onClick={()=>dispatch({type:"reset"})}>reset</button>
+    </>
   )
 }
